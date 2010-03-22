@@ -1,3 +1,10 @@
+# Smithery
+# 
+# Copyright (c) 2010 by Alessandro Amici. All rights reserved.
+#
+# Distributed under the terms of the GNU GPL v2
+
+
 from setuptools import setup, find_packages
 import sys, os
 
