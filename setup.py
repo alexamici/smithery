@@ -36,7 +36,9 @@ setup(
         'zc.buildout>=1.4.0',
         'Cheetah',
     ],
-    entry_points="""
-    # -*- Entry points: -*-
-    """,
+    entry_points={
+        'console_scripts': [
+            'smithery = smithery.app:main',
+        ], 
+    }
 )
