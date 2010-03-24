@@ -39,6 +39,9 @@ setup(
     entry_points={
         'console_scripts': [
             'smithery = smithery.app:main',
-        ], 
+        ],
+        'zc.buildout': [
+            'default = smithery.worker:Worker'
+        ],
     }
 )
