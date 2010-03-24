@@ -6,6 +6,12 @@ from zc.buildout.buildout import Buildout
 
 
 class Smithery(Buildout):
+    """
+    Tiny wrapper around the zc.buildout Buildout class intended to override
+    behaviours specific to building software.
+    
+    The intent of this class is to only use Buildout powerful cfg parsing and the recipe engine.
+    """
     def __init__(self, config_file, options, **keys):
         # hijack the zc.buildout command line option API
         # in order to change the Buildout class defaults
