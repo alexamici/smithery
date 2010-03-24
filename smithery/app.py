@@ -12,7 +12,7 @@ class Smithery(Buildout):
     
     The intent of this class is to only use Buildout powerful cfg parsing and the recipe engine.
     """
-    def __init__(self, config_file, options, **keys):
+    def __init__(self, config_file, options, args=(), **keys):
         # hijack the zc.buildout command line option API
         # in order to change the Buildout class defaults
         # without being too invasive
@@ -26,6 +26,8 @@ class Smithery(Buildout):
             # custom default config
             ('buildout', 'parts', 'smithery'),
             ('smithery', 'recipe', 'smithery'),
+            # override args usage
+            ('smithery', 'args', ' '.join(args))
         ] + options
         Buildout.__init__(self, config_file, options, **keys)
 
@@ -37,5 +39,5 @@ def main(args=argv[1:]):
     parser.add_option("-c", "--config-file", default='smithery.cfg',
         help="read configuration from CONFIG_FILE")
     (keys, args) = parser.parse_args()
-    app = Smithery(keys.config_file, [])
-    app.run(args)
+    app = Smithery(keys.config_file, [], args=args)
+    app.run([])
