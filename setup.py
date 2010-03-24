@@ -41,7 +41,7 @@ setup(
             'smithery = smithery.app:main',
         ],
         'zc.buildout': [
-            'default = smithery.worker:Worker'
+            'default = smithery.recipe:Worker'
         ],
     }
 )
