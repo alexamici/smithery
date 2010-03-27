@@ -5,4 +5,5 @@ develop-eggs
 parts
 .installed.cfg
 *.egg-info
+*.egg-link
 *.e4?
