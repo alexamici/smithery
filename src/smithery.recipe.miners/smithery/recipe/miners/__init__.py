@@ -60,7 +60,8 @@ class Csv(File):
             self.buildout.namespace
         except AttributeError:
             self.buildout.namespace = {}
-        self.buildout.namespace[self.name] = {'records': records}
+        namespace_key = self.options.get('namespace-key', self.name)
+        self.buildout.namespace[namespace_key] = {'records': records}
         return tuple()
 
     def update(self):
