@@ -15,7 +15,7 @@ class Cheetah(object):
     def install(self):
         template = Template.compile(file=self.options['template'])
         with file(self.options['target'], 'w') as outfile:
-            outfile.write(str(template(**self.buildout.namespace)))
+            outfile.write(str(template(namespaces=[self.namespace, {'options': self.options}])))
         return tuple()
 
 
