@@ -3,7 +3,7 @@ bin
 eggs
 develop-eggs
 parts
-.installed.cfg
+.*.cfg
 *.egg-info
 *.egg-link
 *.e4?
