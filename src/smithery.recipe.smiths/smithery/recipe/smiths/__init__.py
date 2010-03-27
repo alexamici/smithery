@@ -15,7 +15,7 @@ class Cheetah(object):
     def install(self):
         template = Template.compile(file=self.options['template'])
         with file(self.options['target'], 'w') as outfile:
-            outfile.write(str(template()))
+            outfile.write(str(template(**self.buildout.namespace)))
         return tuple()
 
 
@@ -28,5 +28,5 @@ class Chameleon(object):
     def install(self):
         template = PageTemplateFile(self.options['template'])
         with file(self.options['target'], 'w') as outfile:
-            outfile.write(str(template()))
+            outfile.write(str(template(**self.buildout.namespace)))
         return tuple()
