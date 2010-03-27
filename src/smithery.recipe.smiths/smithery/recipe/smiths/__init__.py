@@ -1,7 +1,25 @@
-# -*- coding: utf-8 -*-
-"""Recipe smiths"""
 
-class Recipe(object):
+from Cheetah.Template import Template
+
+
+class Cheetah(object):
+    """zc.buildout recipe"""
+
+    def __init__(self, buildout, name, options):
+        self.buildout, self.name, self.options = buildout, name, options
+
+    def install(self):
+        Template.compile(file=self.options['template'])
+        with file(self.options['target'], 'w') as outfile:
+            outfile.write(str(template()))
+        return tuple()
+
+    def update(self):
+        """Updater"""
+        pass
+
+
+class Chameleon(object):
     """zc.buildout recipe"""
 
     def __init__(self, buildout, name, options):
