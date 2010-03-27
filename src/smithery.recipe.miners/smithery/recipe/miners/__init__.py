@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
-"""Recipe miners"""
+
+from csv import reader
 
 
 class Namespace(object):
@@ -37,17 +37,30 @@ class File(object):
 
 
 class Folder(object):
-    """zc.buildout recipe"""
-
     def __init__(self, buildout, name, options):
         self.buildout, self.name, self.options = buildout, name, options
 
     def install(self):
-        """Installer"""
-        # XXX Implement recipe functionality here
         
-        # Return files that were created by the recipe. The buildout
-        # will remove all returned files upon reinstall.
+        return tuple()
+
+    def update(self):
+        """Updater"""
+        pass
+
+
+class Csv(File):
+    def __init__(self, buildout, name, options):
+        self.buildout, self.name, self.options = buildout, name, options
+
+    def install(self):
+        with open(self.options['source']) as csv:
+            records = [r for r in reader(csv)]
+        try:
+            self.buildout.namespace
+        except AttributeError:
+            self.buildout.namespace = {}
+        self.buildout.namespace[self.name] = {'records': records}
         return tuple()
 
     def update(self):

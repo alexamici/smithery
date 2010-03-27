@@ -31,6 +31,7 @@ entry_points = {
         'namespace = smithery.recipe.miners:Namespace', 
         'file = smithery.recipe.miners:File', 
         'folder = smithery.recipe.miners:Folder', 
+        'csv = smithery.recipe.miners:Csv', 
     ], 
 }
 
