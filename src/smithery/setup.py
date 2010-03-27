@@ -2,13 +2,15 @@
 # 
 # Copyright (c) 2010 by Alessandro Amici. All rights reserved.
 #
-# Distributed under the terms of the GNU GPL v2
+# Distributed under the terms of the ZPL 2.1
 
 
 from setuptools import setup, find_packages
 import sys, os
 
 version = '0.1'
+
+tests_require=['zope.testing', 'zc.buildout']
 
 setup(
     name='smithery',
@@ -18,7 +20,7 @@ setup(
         'Development Status :: 2 - Pre-Alpha',
         'Environment :: Console',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: GNU General Public License (GPL)',
+        'License :: OSI Approved :: Zope Public License',
         'Natural Language :: English',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
@@ -43,5 +45,7 @@ setup(
         'zc.buildout': [
             'default = smithery.recipe:Worker'
         ],
-    }
+    }, 
+    tests_require=tests_require,
+    extras_require=dict(tests=tests_require),
 )
