@@ -15,7 +15,7 @@ class Cheetah(object):
     def install(self):
         namespaces = [{'options': self.options}]
         try:
-            namespaces[0:0] = self.buildout.namespace
+            namespaces[0:0] = [self.buildout.namespace]
         except AttributeError:
             pass
         template = Template.compile(file=self.options['template'])
