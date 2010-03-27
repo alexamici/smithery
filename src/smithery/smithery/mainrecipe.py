@@ -1,14 +1,16 @@
 
 import sys
 
+
 class Worker(object):
     def __init__(self, buildout, name, options):
-        self.buildout = buildout
-        self.name = name
-        self.options = options
+        self.buildout, self.name, self.options = buildout, name, options
         self.namespace = {}
 
     def collect_sources(self):
+        sources = self.options['sources'].split()
+        [self.buildout[source]['recipe'] for source in sources]
+        return
         sources = [['smithery.mine', 'default', self.options]]
         sources += [tok.split(':') for tok in self.options['sources'].split()]
         for source in sources:
@@ -39,3 +41,6 @@ class Worker(object):
         self.collect_sources()
         self.make_targets()
         return ()
+
+    def update(self):
+        pass
