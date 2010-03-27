@@ -13,9 +13,14 @@ class Cheetah(object):
         self.buildout, self.name, self.options = buildout, name, options
 
     def install(self):
+        namespaces = [{'options': self.options}]
+        try:
+            namespaces[0:0] = self.buildout.namespace
+        except AttributeError:
+            pass
         template = Template.compile(file=self.options['template'])
         with file(self.options['target'], 'w') as outfile:
-            outfile.write(str(template(namespaces=[self.namespace, {'options': self.options}])))
+            outfile.write(str(template(namespaces=namespaces)))
         return tuple()
 
 
