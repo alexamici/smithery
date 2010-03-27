@@ -24,12 +24,13 @@ long_description = (
    'Download\n'
     '********\n'
     )
-entry_point = 'smithery.recipe.miners:Recipe'
+
 entry_points = {
     'zc.buildout': [
-        'default = smithery.recipe.smiths:Recipe', 
-        'namespace = smithery.recipe.smiths:Namespace', 
-        'file = smithery.recipe.smiths:File', 
+        'default = smithery.recipe.miners:Namespace', 
+        'namespace = smithery.recipe.miners:Namespace', 
+        'file = smithery.recipe.miners:File', 
+        'folder = smithery.recipe.miners:Folder', 
     ], 
 }
 

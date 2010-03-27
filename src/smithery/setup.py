@@ -36,14 +36,13 @@ setup(
     zip_safe=False,
     install_requires=[
         'zc.buildout>=1.4.0',
-        'Cheetah',
     ],
     entry_points={
         'console_scripts': [
             'smithery = smithery.app:main',
         ],
         'zc.buildout': [
-            'default = smithery.recipe:Worker'
+            'default = smithery.mainrecipe:Worker'
         ],
     }, 
     tests_require=tests_require,

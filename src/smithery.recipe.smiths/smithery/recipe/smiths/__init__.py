@@ -1,6 +1,10 @@
 
+from os.path import dirname, realpath
+
+from chameleon.zpt.template import PageTemplateFile
 from Cheetah.Template import Template
 
+__here__ = realpath(dirname(__file__))
 
 class Cheetah(object):
     """zc.buildout recipe"""
@@ -9,14 +13,10 @@ class Cheetah(object):
         self.buildout, self.name, self.options = buildout, name, options
 
     def install(self):
-        Template.compile(file=self.options['template'])
+        template = Template.compile(file=self.options['template'])
         with file(self.options['target'], 'w') as outfile:
             outfile.write(str(template()))
         return tuple()
-
-    def update(self):
-        """Updater"""
-        pass
 
 
 class Chameleon(object):
@@ -26,13 +26,7 @@ class Chameleon(object):
         self.buildout, self.name, self.options = buildout, name, options
 
     def install(self):
-        """Installer"""
-        # XXX Implement recipe functionality here
-        
-        # Return files that were created by the recipe. The buildout
-        # will remove all returned files upon reinstall.
+        template = PageTemplateFile(self.options['template'])
+        with file(self.options['target'], 'w') as outfile:
+            outfile.write(str(template()))
         return tuple()
-
-    def update(self):
-        """Updater"""
-        pass
