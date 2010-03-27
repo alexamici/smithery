@@ -25,7 +25,13 @@ long_description = (
     '********\n'
     )
 entry_point = 'smithery.recipe.miners:Recipe'
-entry_points = {"zc.buildout": ["default = %s" % entry_point]}
+entry_points = {
+    'zc.buildout': [
+        'default = smithery.recipe.smiths:Recipe', 
+        'namespace = smithery.recipe.smiths:Namespace', 
+        'file = smithery.recipe.smiths:File', 
+    ], 
+}
 
 tests_require=['zope.testing', 'zc.buildout']
 
