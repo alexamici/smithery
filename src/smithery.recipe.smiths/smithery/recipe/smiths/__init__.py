@@ -6,32 +6,47 @@ from Cheetah.Template import Template
 
 __here__ = realpath(dirname(__file__))
 
-class Cheetah(object):
-    """zc.buildout recipe"""
+class TemplateMixin(object):
 
     def __init__(self, buildout, name, options):
         self.buildout, self.name, self.options = buildout, name, options
-
-    def install(self):
-        namespaces = [{'options': self.options}]
         try:
-            namespaces[0:0] = [self.buildout.namespace]
+            self.namespace = self.buildout.namespace
         except AttributeError:
-            pass
-        template = Template.compile(file=self.options['template'])
-        with file(self.options['target'], 'w') as outfile:
-            outfile.write(str(template(namespaces=namespaces)))
-        return tuple()
+            self.namespace = {}
 
+    def _render(self, template):
+        """Sub-classes must implement own _render"""
+        raise NotImplementedError
 
-class Chameleon(object):
-    """zc.buildout recipe"""
+    def render(self, template=None):
+        if template is None:
+            template = self.options['template']
+        return self._render(template)
 
-    def __init__(self, buildout, name, options):
-        self.buildout, self.name, self.options = buildout, name, options
+    def render_to_target(self, target=None, **keys):
+        if target is None:
+            target = self.options['target']
+        rendered = self.render(**keys)
+        with file(target, 'w') as outfile:
+            outfile.write(rendered)
+        return target
 
     def install(self):
-        template = PageTemplateFile(self.options['template'])
-        with file(self.options['target'], 'w') as outfile:
-            outfile.write(str(template(**self.buildout.namespace)))
-        return tuple()
+        target = self.render_to_target()
+        return tuple(target)
+
+
+class Cheetah(TemplateMixin):
+
+    def _render(self, template):
+        namespaces = [self.namespace, {'options': self.options}]
+        template_obj = Template.compile(file=template)
+        return str(template_obj(namespaces=namespaces))
+
+
+class Chameleon(TemplateMixin):
+
+    def _render(self, template):
+        template_obj = PageTemplateFile(template)
+        return str(template_obj(**self.namespace))
