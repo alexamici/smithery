@@ -23,10 +23,12 @@ class Smithery(Buildout):
             ('buildout', 'eggs-directory', '.'), 
             ('buildout', 'develop-eggs-directory', '.'), 
             ('buildout', 'parts-directory', '.'), 
+            ('buildout', 'offline', 'true'),
             # custom default config
             ('buildout', 'parts', '${smithery:parts}'),
             # override args usage
-            ('smithery', 'args', ' '.join(args))
+            ('smithery', 'recipe', 'smithery'),
+            ('smithery', 'args', ' '.join(args)),
         ] + options
         Buildout.__init__(self, config_file, options, **keys)
 
