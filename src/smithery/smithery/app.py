@@ -27,7 +27,6 @@ class Smithery(Buildout):
             # custom default config
             ('buildout', 'parts', '${smithery:parts}'),
             # override args usage
-            ('smithery', 'recipe', 'smithery'),
             ('smithery', 'args', ' '.join(args)),
         ] + options
         Buildout.__init__(self, config_file, options, **keys)

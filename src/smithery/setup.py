@@ -41,9 +41,6 @@ setup(
         'console_scripts': [
             'smithery = smithery.app:main',
         ],
-        'zc.buildout': [
-            'default = smithery.mainrecipe:Worker'
-        ],
     }, 
     tests_require=tests_require,
     extras_require=dict(tests=tests_require),
