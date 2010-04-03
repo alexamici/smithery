@@ -18,11 +18,11 @@ class Smithery(Buildout):
         # without being too invasive
         options = [
             # disable bootstrap directories and installed parts tracking
-            ('buildout', 'installed', ''), 
-            ('buildout', 'bin-directory', '.'), 
-            ('buildout', 'eggs-directory', '.'), 
-            ('buildout', 'develop-eggs-directory', '.'), 
-            ('buildout', 'parts-directory', '.'), 
+            ('buildout', 'installed', ''),
+            ('buildout', 'bin-directory', '.'),
+            ('buildout', 'eggs-directory', '.'),
+            ('buildout', 'develop-eggs-directory', '.'),
+            ('buildout', 'parts-directory', '.'),
             ('buildout', 'offline', 'true'),
             # custom default config
             ('buildout', 'parts', '${smithery:parts}'),
