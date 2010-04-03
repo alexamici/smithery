@@ -7,3 +7,4 @@ parts
 *.egg-info
 *.egg-link
 *.e4?
+src/*
