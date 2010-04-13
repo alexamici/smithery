@@ -1,2 +1,8 @@
 <html>
+<body>
+<h1>${wms.identification.title}</h1>
+<ul>
+    <li tal:repeat="name,layer wms.contents.items()"><strong>$name</strong> - ${layer.title}</li>
+</ul>
+</body>
 </html>
