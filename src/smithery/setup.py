@@ -39,7 +39,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'smithery = smithery.app:main',
+            'smithery = smithery:main',
         ],
     }, 
     tests_require=tests_require,
