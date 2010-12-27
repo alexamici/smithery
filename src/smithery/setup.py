@@ -4,12 +4,9 @@
 #
 # Distributed under the terms of the ZPL 2.1
 
-
 from setuptools import setup, find_packages
-import sys, os
 
 version = '0.2'
-
 tests_require=['zope.testing', 'zc.buildout']
 
 setup(

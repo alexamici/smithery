@@ -11,6 +11,12 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+smithery
+--------
+
+.. automodule:: smithery
+    :members:
+
 smithery.recipe.miners
 ----------------------
 
