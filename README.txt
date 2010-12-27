@@ -17,3 +17,13 @@ Setup development environment
     python bootstrap.py -d
     ./bin/buildout -nv
 
+Test and examples
+-----------------
+
+    ./bin/test
+    ./bin/smithery -c examples/csv.cfg
+
+Update docs
+-----------
+
+     make -C docs/ html
