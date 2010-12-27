@@ -8,7 +8,7 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '0.1'
+version = '0.2'
 
 tests_require=['zope.testing', 'zc.buildout']
 
@@ -17,7 +17,7 @@ setup(
     version=version,
     description="Collect and reformat data",
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
+        'Development Status :: 3 - Alpha',
         'Environment :: Console',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: Zope Public License',
@@ -28,9 +28,9 @@ setup(
     ],
     keywords='',
     author='Alessandro Amici',
-    author_email='a.amici@bopen.it',
+    author_email='alexamici@gmail.com',
     url='http://github.com/alexamici/Smithery',
-    license='GPL',
+    license='ZPL',
     packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
     include_package_data=True,
     zip_safe=False,
