@@ -1,7 +1,7 @@
 # Smithery
 # 
-# Copyright (c) 2011 by B-Open Solutions srl. All rights reserved.
-# Copyright (c) 2010-2011 by Alessandro Amici. All rights reserved.
+# Copyright (c) 2011 B-Open Solutions srl. All rights reserved.
+# Copyright (c) 2010-2011 Alessandro Amici. All rights reserved.
 #
 # Distributed under the terms of the ZPL 2.1
 

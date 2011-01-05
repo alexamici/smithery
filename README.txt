@@ -28,5 +28,8 @@ Update docs
 
      make -C docs/ html
 
-Copyright (c) 2011 by B-Open Solutions srl. All rights reserved.
-Copyright (c) 2010-2011 by Alessandro Amici. All rights reserved.
+Credits
+-------
+
+Copyright (c) 2011 B-Open Solutions srl. All rights reserved.
+Copyright (c) 2010-2011 Alessandro Amici. All rights reserved.
