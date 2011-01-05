@@ -7,7 +7,6 @@ parts
 *.egg-info
 *.egg-link
 *.e4?
-src/*.recipe.*
 docs/Makefile
 docs/make.bat
 docs/html
