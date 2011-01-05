@@ -13,6 +13,7 @@ from .base import Miner
 
 
 class BaseGoogleCalendar(Miner):
+    headers = ['project', 'title', 'summary', 'start_time', 'end_time', 'who', 'attendee_status']
     def setup_service(self):
         service = CalendarService()
         service.email = self.options['email']
@@ -40,7 +41,7 @@ class BaseGoogleCalendar(Miner):
         csv_filename = self.options.get('csv_filename', 'temp.csv')
         csvwriter = writer(open(csv_filename, 'wb'))
         # keep the header in sync with event_details
-        csvwriter.writerow(['project', 'title', 'summary', 'start_time', 'end_time', 'who'])
+        csvwriter.writerow(self.headers)
         for i, calendar in enumerate(feed.entry):
             # is there no other way to get the 'user' of a feed?
             user = unquote(calendar.content.src.split('/')[5])
@@ -60,4 +61,21 @@ class BaseGoogleCalendar(Miner):
         return tuple()
 
 class GoogleCalendar(BaseGoogleCalendar):
-    pass
+    headers = BaseGoogleCalendar.headers + ['hours', 'day', 'month', 'year']
+    def event_details(self, event):
+        event_rows = super(GoogleCalendar, self).event_details(event)
+        for event_row in event_rows:
+            if len(event.when[0].start_time) == 10: # whole day
+                start_time = datetime.strptime(event.when[0].start_time, '%Y-%m-%d')
+                end_time = datetime.strptime(event.when[0].end_time, '%Y-%m-%d')
+                # FIXME: multi-day events are 8 hours!!!!
+                hours = 8.
+            else:
+                start_time = datetime.strptime(event.when[0].start_time[0:19], '%Y-%m-%dT%H:%M:%S')
+                end_time = datetime.strptime(event.when[0].end_time[0:19], '%Y-%m-%dT%H:%M:%S')
+                duration = (end_time - start_time)
+                hours = duration.seconds / 3600. + duration.days * 8.
+            event_row.append(hours)
+            day = start_time.isoformat()[:10]
+            event_row += [day, day[:7], day[:4]]
+        return event_rows
