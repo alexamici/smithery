@@ -3,7 +3,7 @@ Google-miners are recipes that extract data and metadata from Google services.
 """
 
 from csv import writer
-from datetime import datetime
+from datetime import datetime, date
 from re import compile
 from urlparse import unquote
 
@@ -13,7 +13,7 @@ from .base import Miner
 
 
 class BaseGoogleCalendar(Miner):
-    headers = ['project', 'title', 'summary', 'start_time', 'end_time', 'who', 'attendee_status']
+    headers = ['project', 'title', 'summary', 'start_time', 'end_time', 'who', 'attendee_status', 'uid']
     def setup_service(self):
         service = CalendarService()
         service.email = self.options['email']
@@ -29,7 +29,14 @@ class BaseGoogleCalendar(Miner):
             if who.email.endswith('group.calendar.google.com'):
                 continue
             if self.user_regex.search(who.email):
-                event_rows.append([event.title.text, event.summary, event.when[0].start_time[:19], event.when[0].end_time[:19], who.email, who.attendee_status.value])
+                event_rows.append(
+                    [event.title.text,
+                    event.summary,
+                    event.when[0].start_time[:19],
+                    event.when[0].end_time[:19],
+                    who.email,
+                    who.attendee_status.value,
+                    event.uid.value])
         return event_rows
 
     def install(self):
@@ -53,6 +60,7 @@ class BaseGoogleCalendar(Miner):
                 query.start_max = self.options['start_max']
             query.max_results = self.options.get('max_results', '500')
             events_feed = service.CalendarQuery(query)
+            print ' %r' % (len(events_feed.entry),)
             assert len(events_feed.entry) < int(query.max_results)
             for event in events_feed.entry:
                 for event_row in self.event_details(event):
@@ -61,7 +69,7 @@ class BaseGoogleCalendar(Miner):
         return tuple()
 
 class GoogleCalendar(BaseGoogleCalendar):
-    headers = BaseGoogleCalendar.headers + ['hours', 'day', 'month', 'year']
+    headers = BaseGoogleCalendar.headers + ['hours', 'day', 'month', 'year', 'isoweekdate', 'isoweek']
     def event_details(self, event):
         event_rows = super(GoogleCalendar, self).event_details(event)
         for event_row in event_rows:
@@ -78,4 +86,6 @@ class GoogleCalendar(BaseGoogleCalendar):
             event_row.append(hours)
             day = start_time.isoformat()[:10]
             event_row += [day, day[:7], day[:4]]
+            isoweekdate = '%d-W%02d-%d' % datetime.strptime(day, '%Y-%m-%d').isocalendar()
+            event_row += [isoweekdate, isoweekdate[:8]]
         return event_rows
