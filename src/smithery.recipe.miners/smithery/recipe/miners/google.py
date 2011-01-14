@@ -29,6 +29,10 @@ class BaseGoogleCalendar(Miner):
             if who.email.endswith('group.calendar.google.com'):
                 continue
             if self.user_regex.search(who.email):
+                try:
+                    uid = event.uid.value
+                except:
+                    uid = event.id.text
                 event_rows.append(
                     [event.title.text,
                     event.summary,
@@ -36,7 +40,7 @@ class BaseGoogleCalendar(Miner):
                     event.when[0].end_time[:19],
                     who.email,
                     who.attendee_status.value,
-                    event.uid.value])
+                    uid])
         return event_rows
 
     def install(self):
