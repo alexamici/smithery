@@ -30,7 +30,7 @@ entry_points = {
         'default = smithery.recipe.smiths:Cheetah', 
         'cheetah = smithery.recipe.smiths:Cheetah', 
         'chameleon = smithery.recipe.smiths:Chameleon', 
-
+        'xpath = smithery.recipe.smiths:XPath', 
     ], 
 }
 tests_require=['zope.testing', 'zc.buildout']
