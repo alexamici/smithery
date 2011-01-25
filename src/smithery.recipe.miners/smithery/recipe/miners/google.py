@@ -3,7 +3,7 @@ Google-miners are recipes that extract data and metadata from Google services.
 """
 
 from csv import writer
-from datetime import datetime, date
+from datetime import datetime
 from re import compile
 from urlparse import unquote
 
