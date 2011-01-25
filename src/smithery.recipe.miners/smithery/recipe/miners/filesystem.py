@@ -1,7 +1,7 @@
 
 from __future__ import with_statement
 
-from csv import reader
+from csv import DictReader
 from os import listdir
 from os.path import isdir, join
 
@@ -43,7 +43,7 @@ class Folder(Miner):
 class Csv(File):
     def install(self):
         with open(self.options['source']) as csv:
-            records = [r for r in reader(csv)]
+            records = [r for r in DictReader(csv)]
         namespace_key = self.options.get('namespace-key', self.name)
         self.buildout.namespace[namespace_key] = {'records': records}
         return tuple()
