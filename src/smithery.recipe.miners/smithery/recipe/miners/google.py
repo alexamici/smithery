@@ -28,6 +28,10 @@ class BaseGoogleCalendar(Miner):
             # skip calendar fake users
             if who.email.endswith('group.calendar.google.com'):
                 continue
+            # skip crap events (observed and unexplained)
+            if who.attendee_status is None:
+                print 'Skip: anomalous attendee %r in event %r (no attendee_status)' % (who.email, event.title.text)
+                continue
             if self.user_regex.search(who.email):
                 try:
                     uid = event.uid.value
@@ -67,6 +71,10 @@ class BaseGoogleCalendar(Miner):
             print ' %r' % (len(events_feed.entry),)
             assert len(events_feed.entry) < int(query.max_results)
             for event in events_feed.entry:
+                # skip recurrent event because they are too ambiguous
+                if event.recurrence:
+                    print 'Skip: recurrent event %r' % event.title.text
+                    continue
                 for event_row in self.event_details(event):
                     csvwriter.writerow([calendar.title.text] + event_row)
         self.buildout.namespace['google_calendar'] = {'csv_filename': csv_filename}
