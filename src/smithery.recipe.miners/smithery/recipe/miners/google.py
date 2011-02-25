@@ -81,6 +81,7 @@ class BaseGoogleCalendar(Miner):
         return tuple()
 
 class GoogleCalendar(BaseGoogleCalendar):
+    """Exports Google Calendar events data into a CSV file suitable for further processing"""
     headers = BaseGoogleCalendar.headers + ['hours', 'day', 'month', 'year', 'isoweekdate', 'isoweek']
     def event_details(self, event):
         event_rows = super(GoogleCalendar, self).event_details(event)

@@ -7,7 +7,7 @@
 
 from setuptools import setup, find_packages
 
-version = '0.2'
+version = '0.3'
 tests_require=['zope.testing', 'zc.buildout']
 
 setup(
@@ -34,6 +34,8 @@ setup(
     zip_safe=False,
     install_requires=[
         'zc.buildout>=1.4.0',
+        'smithery.recipe.miners',
+        'smithery.recipe.smiths',
     ],
     entry_points={
         'console_scripts': [

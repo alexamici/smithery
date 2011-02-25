@@ -8,22 +8,11 @@ from setuptools import setup, find_packages
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-version = '0.2'
+version = '0.3'
 
 long_description = (
     read('README')
-    + '\n' +
-    'Detailed Documentation\n'
-    '**********************\n'
-    + '\n' +
-    read('smithery', 'recipe', 'miners', 'README.txt')
-    + '\n' +
-    'Contributors\n' 
-    '************\n'
-    + '\n' +
-   'Download\n'
-    '********\n'
-    )
+)
 
 entry_points = {
     'zc.buildout': [
