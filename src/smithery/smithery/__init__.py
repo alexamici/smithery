@@ -2,7 +2,14 @@
 from sys import argv
 from optparse import OptionParser
 
-from zc.buildout.buildout import Buildout
+# HACK: this is hopefully a temporary hack around what looks like
+#    a circular dependency between setuptools/smithery/zc.buildout
+try:
+    from zc.buildout.buildout import Buildout
+except ImportError:
+    class Buildout(object):
+        def install(self):
+            pass
 
 
 class Smithery(Buildout):
