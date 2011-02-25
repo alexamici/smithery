@@ -7,11 +7,11 @@
 
 from setuptools import setup, find_packages
 
-version = '0.3'
+version = '0.4'
 tests_require=['zope.testing', 'zc.buildout']
 
 setup(
-    name='smithery',
+    name='smithery.app',
     version=version,
     description="Collect and reformat data",
     classifiers=[
@@ -30,6 +30,7 @@ setup(
     url='http://github.com/alexamici/smithery',
     license='ZPL',
     packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
+    namespace_packages=['smithery'], 
     include_package_data=True,
     zip_safe=False,
     install_requires=[
@@ -39,7 +40,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'smithery = smithery:main',
+            'smithery = smithery.app:main',
         ],
     }, 
     tests_require=tests_require,
