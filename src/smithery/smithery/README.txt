@@ -1,5 +1,0 @@
-
-Smithery
-========
-
-Collect and reformat data and metadata
