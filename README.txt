@@ -13,7 +13,7 @@ Optional dependencies
 ---------------------
 
  * gdata-python-client (for Google Data APIs support)
- * 
+ * OWSLib (for WMS support)
 
 Setup development environment
 -----------------------------
@@ -37,6 +37,7 @@ Update docs
 Copyright statement
 -------------------
 
+Copyright (c) 2011 e-GEOS SpA. All rights reserved.
 Copyright (c) 2011 B-Open Solutions srl. All rights reserved.
 Copyright (c) 2010-2011 Alessandro Amici. All rights reserved.
 
