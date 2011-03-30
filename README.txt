@@ -14,6 +14,7 @@ Optional dependencies
 
  * gdata-python-client (for Google Data APIs support)
  * OWSLib (for WMS support)
+ * lxml (for xpath)
 
 Setup development environment
 -----------------------------
