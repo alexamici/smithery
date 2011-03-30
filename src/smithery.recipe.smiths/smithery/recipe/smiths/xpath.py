@@ -43,8 +43,11 @@ class XPath(TemplateMixin):
         rule_section = self.buildout[self.options.get('rules', 'xpath_rules')]
         data = self.namespace[self.options.get('namespace-key', 'data')]
         tree = etree.parse(open(template))
-        print data['records']
+
+        if 'records' in data:
+            data = data['records'][0]
+
         for option, value in rule_section.items():
             for tag in tree.xpath(option):
-                tag.text = data['records'][0][value]
+                tag.text = unicode(data[value])
         return etree.tostring(tree)
