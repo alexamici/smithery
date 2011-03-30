@@ -14,7 +14,7 @@ The namespace is intended to be eventually processed and published by smiths as 
 from .base import Miner
 from .filesystem import listdir2, Namespace, File, Csv
 try:
-    from .geodata import WMS
+    from .geodata import WMS, Raster
 except ImportError:
     pass
 try:
@@ -22,5 +22,5 @@ try:
 except ImportError:
     pass
 
-__all__ = ('Miner', 'Namespace', 'File', 'Csv', 'WMS',
+__all__ = ('Miner', 'Namespace', 'File', 'Csv', 'WMS', 'Raster',
     'listdir2', 'BaseGoogleCalendar', 'GoogleCalendar')

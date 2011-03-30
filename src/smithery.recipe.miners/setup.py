@@ -23,6 +23,7 @@ entry_points = {
         'csv = smithery.recipe.miners:Csv', 
         'wms = smithery.recipe.miners:WMS', 
         'google_calendar = smithery.recipe.miners:GoogleCalendar', 
+        'raster = smithery.recipe.miners:Raster', 
     ], 
 }
 
@@ -52,6 +53,9 @@ setup(
     install_requires=['setuptools',
         'zc.buildout',
         'OWSLib',
+        # optional dependencies
+        # 'gdata',
+        # 'lxml',
     ],
     tests_require=tests_require,
     extras_require=dict(tests=tests_require),
